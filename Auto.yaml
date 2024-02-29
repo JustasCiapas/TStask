@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Install Docker
+      command: sudo snap install docker
+
+    - name: Clone repository from GITHUB
+      command: git clone https://github.com/JustasCiapas/TStask.git
+
+    - name: Go to repository and Build docker container
+      command: sudo docker build -t app .
+      args:
+        chdir: TStask/
+
+    - name: Run Docker container
+      command: sudo docker run -d -p 80:80 app
